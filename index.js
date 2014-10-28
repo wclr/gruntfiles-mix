@@ -29,7 +29,7 @@ module.exports = function(grunt, options){
         require(gruntfile)(grunt, config, prefix)
     })
 
-    process.chdir(__dirname)
+    process.chdir(baseDir)
     grunt.initConfig(config)
 
 }

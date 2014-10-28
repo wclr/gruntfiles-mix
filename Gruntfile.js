@@ -1,5 +1,2 @@
-module.exports = function(grunt) {
-
-	require('gruntfiles-mix')(grunt)
-
-};
+/* Default gruntfile-mix Gruntfile.js */
+module.exports = require('gruntfiles-mix');
