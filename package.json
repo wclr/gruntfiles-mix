@@ -11,6 +11,12 @@
     "type": "git",
     "url": "http://github.com/whitecolor/gruntfiles-mix"
   },
+  "files": [
+    "index.js",
+    "install.js",
+    "Gruntfile.js",
+    "README.md"
+  ],
   "author": "Whitecolor",
   "license": "ISC",
   "bugs": {
