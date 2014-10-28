@@ -1,10 +1,11 @@
 {
   "name": "gruntfiles-mix",
-  "version": "0.0.0",
-  "description": "Combines tasks from mutliple gruntfiles",
+  "version": "0.0.1",
+  "description": "Combines tasks from multiple gruntfiles.",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "install": "install.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/whitecolor/gruntfiles-mix/issues"
   },
-  "homepage": "https://github.com/whitecolor/gruntfiles-mix"
+  "homepage": "https://github.com/whitecolor/gruntfiles-mix",
+  "dependencies": {
+    "xtend": "^4.0.0"
+  }
 }

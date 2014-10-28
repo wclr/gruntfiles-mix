@@ -1,5 +1,7 @@
-module.exports = function(grunt) {
+var fs = require('fs')
 
-	require('gruntfiles-mix')(grunt)
+var gruntfilePath = __dirname + '/../../Gruntfile.js'
 
-};
+if (!fs.existsSync(gruntfilePath)){
+	fs.createReadStream(__dirname + '/Gruntfile.js').pipe(fs.createWriteStream(gruntfilePath));
+}
