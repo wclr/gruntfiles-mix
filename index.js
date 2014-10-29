@@ -5,6 +5,7 @@ var fs = require('fs'),
 
 var defaults = {
     prefixSeparator: '-',
+    prefixWithFullName: false,
     addPrefix: false
 }
 
@@ -34,8 +35,14 @@ module.exports = function(options){
             var dir = path.dirname(gruntfile),
                 name = path.basename(dir)
             process.chdir(dir)
-            var prefix = options.addPrefix ? name.substring(0, name.indexOf('-')) : ''
-            prefix && (prefix += options.prefixSeparator)
+            if (options.addPrefix){
+
+                var namePart = name.match(/^[\w\d]*/i),
+                    prefix = (!options.prefixWithFullName && namePart && namePart[0]) || name
+
+                prefix && (prefix += options.prefixSeparator)
+            }
+
             require(gruntfile)(grunt, config, prefix)
         })
 
