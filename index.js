@@ -4,32 +4,47 @@ var fs = require('fs'),
 
 
 var defaults = {
-    prefixSeparator: '-'
+    prefixSeparator: '-',
+    addPrefix: false
 }
 
-module.exports = function(grunt, options){
+module.exports = function(options){
 
     options = extend(defaults ,options)
 
-    var baseDir = process.cwd()
+    return function(grunt, config){
 
+        if (!grunt){
+            console.log('Gruntfile-mix: please pass grunt object.')
+            return
+        }
 
-    var list = fs.readdirSync(baseDir).map(function(name){
-        return path.join(baseDir, name, 'Gruntfile.js')
-    }).filter(function(f){return fs.existsSync(f)})
+        var baseDir = process.cwd() || options.baseDir
 
-    var config = {}
+        process.chdir(baseDir)
 
-    list.forEach(function(gruntfile){
-        var dir = path.dirname(gruntfile),
-            name = path.basename(dir)
-        process.chdir(dir)
-        var prefix = name.substring(0, name.indexOf('-'))
-        prefix += options.prefixSeparator
-        require(gruntfile)(grunt, config, prefix)
-    })
+        // find child directories with Gruntfile.js
+        var list = fs.readdirSync(baseDir).map(function(name){
+            return path.join(baseDir, name, 'Gruntfile.js')
+        }).filter(function(f){return fs.existsSync(f)})
 
-    process.chdir(baseDir)
-    grunt.initConfig(config)
+        config = config || {}
 
+        list.forEach(function(gruntfile){
+            var dir = path.dirname(gruntfile),
+                name = path.basename(dir)
+            process.chdir(dir)
+            var prefix = options.addPrefix ? name.substring(0, name.indexOf('-')) : ''
+            prefix && (prefix += options.prefixSeparator)
+            require(gruntfile)(grunt, config, prefix)
+        })
+
+        process.chdir(baseDir)
+
+        if (arguments.length == 1){
+            grunt.initConfig(config)
+        }
+
+        return config
+    }
 }

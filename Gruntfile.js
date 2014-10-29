@@ -1,2 +1,4 @@
 /* Default gruntfile-mix Gruntfile.js */
-module.exports = require('gruntfiles-mix');
+module.exports = require('gruntfiles-mix')({
+	// addPrefix: true
+});
