@@ -5,7 +5,7 @@ var fs = require('fs'),
 
 var defaults = {
     prefixSeparator: '-',
-    prefixWithFullName: false,
+    useNamePartAsPrefix: true,
     addPrefix: false
 }
 
@@ -31,6 +31,8 @@ module.exports = function(options){
 
         config = config || {}
 
+        var oldRegisterTask = grunt.registerTask
+
         list.forEach(function(gruntfile){
             var dir = path.dirname(gruntfile),
                 name = path.basename(dir)
@@ -38,15 +40,21 @@ module.exports = function(options){
             if (options.addPrefix){
 
                 var namePart = name.match(/^[\w\d]*/i),
-                    prefix = (!options.prefixWithFullName && namePart && namePart[0]) || name
+                    prefix = (options.useNamePartAsPrefix && namePart && namePart[0]) || name
 
                 prefix && (prefix += options.prefixSeparator)
+                grunt.registerTask = function(){
+                    var args = Array.prototype.slice.call(arguments);
+                    args[0] = prefix + args[0]
+                    oldRegisterTask.apply(grunt, args)
+                }
             }
 
-            require(gruntfile)(grunt, config, prefix)
+            require(gruntfile)(grunt, config)
         })
 
         process.chdir(baseDir)
+        grunt.registerTask = oldRegisterTask
 
         if (arguments.length == 1){
             grunt.initConfig(config)

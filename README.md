@@ -4,20 +4,32 @@ Combines tasks from multiple Gruntfiles in sub folders.
 
 Takes tasks Gruntfiles.js from (direct) child folders and combines them into single tasks list!
 
-If no Gruntfile.js in install directory the default one is created:
+### Installation
+
+> npm install gruntfiles-mix
+
+After install if no Gruntfile.js in install directory the default one is created automatically:
 
 ```js
 /* Default gruntfile-mix Gruntfile.js */
 module.exports = require('gruntfiles-mix')({
-	// addPrefix: true
+		addPrefix: true,
+    	useNamePartAsPrefix: true,
+    	prefixSeparator: '-'
 });
 ```
 
-### You can add options
+### You can use options to modify the behaviour
 
 #### addPrefix
 Type: `Boolean`
 Default value: `false`
+
+Adds directory name as prefix to task name.
+
+#### useNamePartAsPrefix
+Type: `Boolean`
+Default value: `true`
 
 Adds directory name as prefix to task name.
 
@@ -33,11 +45,10 @@ You typical grunt file in sub directories when used in Gruntfiles-mix scenario s
 and register needed tasks, but not initialize grunt configuration.
 
 ```js
-module.exports = function(grunt, config, prefix){
+module.exports = function(grunt, config){
 
 	// create your config if none is passed
 	config = config || {}
-	prefix = prefix || ''
 
 	// define project/directory specific tasks
 	grunt.loadNpmTasks('grunt-contrib-clean')
@@ -49,8 +60,8 @@ module.exports = function(grunt, config, prefix){
     // while execution of tasks CWD is Gruntfiles-mix dir, NOT __dirname of current Gruntfile.
 	config.clean.dist = [__dirname + '/dist']
 
-	// register custom task using prefix
-	grunt.registerTask(prefix + 'clean-dist', ['clean:dist'])
+	// register custom task
+	grunt.registerTask('clean-dist', ['clean:dist'])
 
 	 // make possible to use this Gruntfile as usual (if only "grunt" argument is passed)
 	 if (arguments.length == 1){

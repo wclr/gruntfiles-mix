@@ -1,3 +1,3 @@
-module.exports = function(grunt, config, prefix){
-    grunt.registerTask(prefix + 'task1', function(){})
+module.exports = function(grunt, config){
+    grunt.registerTask('task1', function(){})
 }
