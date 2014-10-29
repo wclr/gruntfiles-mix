@@ -1,6 +1,6 @@
 {
   "name": "gruntfiles-mix",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Combines tasks from multiple gruntfiles.",
   "main": "index.js",
   "scripts": {
