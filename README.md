@@ -1,10 +1,8 @@
 ### Mix Gruntfiles!
 
-Combines tasks from multiple Gruntfiles.
+Combines tasks from multiple Gruntfiles in sub folders.
 
 Takes tasks Gruntfiles.js from (direct) child folders and combines them into single tasks list!
-
-To avoid problems prefer to use ```absolute paths``` (using ```__dirname```) in your grunt tasks.
 
 If no Gruntfile.js in install directory the default one is created:
 
@@ -32,10 +30,9 @@ Character(s) that separates prefix from task.
 ### Gruntfiles with tasks
 
 You typical grunt file in sub directories when used in Gruntfiles-mix scenario should modify supplied grunt config object
-and register need tasks, but not initialize grunt. You can use passed prefix to created tasks with it
+and register needed tasks, but not initialize grunt configuration.
 
 ```js
-/* Default gruntfile-mix Gruntfile.js */
 module.exports = function(grunt, config, prefix){
 
 	// create your config if none is passed
@@ -48,12 +45,14 @@ module.exports = function(grunt, config, prefix){
 	// assume that clean tasks may already exist in config
 	config.clean = config.clean || {}
 
+    // to avoid problems with paths resolution prefer to use absolute paths in tasks (using ```__dirname```)
+    // while execution of tasks CWD is Gruntfiles-mix dir, NOT __dirname of current Gruntfile.
 	config.clean.dist = [__dirname + '/dist']
 
 	// register custom task using prefix
 	grunt.registerTask(prefix + 'clean-dist', ['clean:dist'])
 
-	 // make possible to use this Gruntfile as usual (if only "grunt" argument is passed
+	 // make possible to use this Gruntfile as usual (if only "grunt" argument is passed)
 	 if (arguments.length == 1){
 	    grunt.initConfig(config)
 	 }
