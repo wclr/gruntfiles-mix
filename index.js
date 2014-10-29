@@ -15,7 +15,7 @@ module.exports = function(options){
     return function(grunt, config){
 
         if (!grunt){
-            console.log('Gruntfile-mix: please pass grunt object.')
+            console.log('Gruntfiles-mix: please pass grunt object.')
             return
         }
 
