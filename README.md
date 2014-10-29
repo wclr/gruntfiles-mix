@@ -23,7 +23,7 @@ module.exports = require('gruntfiles-mix')({
 
 #### addPrefix
 Type: `Boolean`
-Default value: `false`
+Default value: `true`
 
 Adds directory name as prefix to task name.
 
@@ -31,7 +31,7 @@ Adds directory name as prefix to task name.
 Type: `Boolean`
 Default value: `true`
 
-Adds directory name as prefix to task name.
+Adds only first symbolic part for directory name as prefix (for directory "front-app" will take "front" as prefix).
 
 #### prefixSeparator
 Type: `String`
