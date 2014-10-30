@@ -1,6 +1,6 @@
 {
   "name": "gruntfiles-mix",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Combines tasks from multiple gruntfiles.",
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/whitecolor/gruntfiles-mix",
   "dependencies": {
+    "grunt": "~0.4.5",
     "xtend": "^4.0.0"
   },
   "devDependencies": {
