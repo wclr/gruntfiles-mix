@@ -70,6 +70,11 @@ module.exports = function(grunt, config){
 };
 ```
 
+### Caution!
+
+Each time grunt.loadNmpTask in certain Gruntfile is executed it loads tasks (grunt module) from respective folder.
+If different Gruntfiles use the same modules with different versions tasks will be executed using last one loaded.
+
 ### Tests
 
 For test use command: node test
