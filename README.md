@@ -6,6 +6,7 @@ Takes tasks Gruntfiles.js from (direct) child folders and combines them into sin
 
 ### Installation
 
+> npm install grunt
 > npm install gruntfiles-mix
 
 After install if no Gruntfile.js in install directory the default one is created automatically:
@@ -23,7 +24,7 @@ module.exports = require('gruntfiles-mix')({
 
 #### addPrefix
 Type: `Boolean`
-Default value: `true`
+Default value: `false`
 
 Adds directory name as prefix to task name.
 
